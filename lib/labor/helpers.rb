@@ -1,7 +1,7 @@
 module Labor
   module Helpers
     def classify(word)
-      word.split(/-_/).each { |part| part[0] = part[0].chr.upcase }.join
+      word.split('-').each { |part| part[0] = part[0].chr.upcase }.join
     end
 
     def constantize(camel_cased_word)

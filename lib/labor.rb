@@ -8,8 +8,6 @@ require 'labor/worker'
 require 'labor/config'
 
 module Labor
-  attr_accessor :verbose
-
   # Sets the server addresses that we'd like to connect to.
   #
   # servers - The String address of the server or an Array 
@@ -52,5 +50,9 @@ module Labor
   #   if nothing has been set.
   def self.config
     @config ||= Labor::Config.new
+  end
+
+  class << self
+    attr_accessor :verbose 
   end
 end

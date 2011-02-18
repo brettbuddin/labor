@@ -8,6 +8,7 @@ require 'labor/worker'
 require 'labor/config'
 
 module Labor
+  attr_accessor :verbose
 
   # Sets the server addresses that we'd like to connect to.
   #

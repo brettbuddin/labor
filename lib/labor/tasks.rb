@@ -17,6 +17,7 @@ namespace :labor do
     if ENV['PIDFILE']
       File.open(ENV['PIDFILE'], 'w') { |f| f << Process.pid.to_s }
     end
+    Labor.verbose = ENV['VERBOSE']
 
     worker.work
   end

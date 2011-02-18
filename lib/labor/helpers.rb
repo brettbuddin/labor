@@ -20,5 +20,11 @@ module Labor
       end
       constant
     end
+
+    def log(str)
+      if Labor.verbose
+        puts "#{Time.now.strftime('%I:%M:%S %d-%m-%Y')}: #{str}"
+      end
+    end
   end
 end

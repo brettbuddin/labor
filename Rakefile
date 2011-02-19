@@ -4,11 +4,11 @@ begin
   Jeweler::Tasks.new do |gem|
     gem.name = "labor"
     gem.version = "0.1"
-    gem.summary = "Wrapper for Gearman to make workers easier to create and manage."
+    gem.summary = "More portable jobs for Gearman workers."
     gem.description = <<-desc
-      Wrapper for Gearman to make workers easier to create and manage.
+      Wrapper for gearman-ruby that provides a different, and more portable, way of defining jobs.
     desc
-    gem.email = "brett@motobias.com"
+    gem.email = "brett@intraspirit.net"
     gem.homepage = "http://github.com/brettbuddin/labor"
     gem.date = Time.now.strftime('%Y-%m-%d')
     gem.authors = ["Brett Buddin"]

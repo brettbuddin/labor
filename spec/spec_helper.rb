@@ -1,1 +1,4 @@
-require File.join(File.dirname(__FILE__), '..', 'lib', 'labor')
+$LOAD_PATH.unshift File.expand_path("../lib", File.dirname(__FILE__))
+
+require 'rspec'
+require 'labor'

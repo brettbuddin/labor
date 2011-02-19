@@ -28,14 +28,23 @@ module Labor
         klass.instance_variable_set(:@config, Labor.config)
 
         @worker.add_ability(ability) do |data, job|
-          payload = JSON.parse data
-          klass.perform(payload, job)
+          begin
+            payload = JSON.parse data
+            klass.perform(payload, job)
+          rescue Exception => e
+            log "Job failed: #{e.inspect}"
+            return false
+          end
         end
 
         if klass.respond_to?(:after_perform)
           @worker.after_ability(ability) do |result, data|
+          begin
             payload = JSON.parse data
             klass.after_perform(payload, result)
+          rescue Exception => e
+            log "After job failed: #{e.inspect}"
+          end
           end
         end
       end

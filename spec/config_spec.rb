@@ -25,6 +25,10 @@ describe Labor::Config do
     @config[:foo].should == "bar"
   end
 
+  it "provides access to keys using methods" do
+    @config.set(:foo, "bar")
+    @config.foo.should == "bar"
+  end
 
   it "allows write access to keys via bracket method" do
     @config[:foo] = "bar"
@@ -52,5 +56,25 @@ describe Labor::Config do
       set :i_am, "at the \#{foo}"
     CONFIG
     @config.get(:i_am).should == "at the bar"
+  end
+
+  describe :grouping do
+    before(:each) do
+      @config.instance_eval <<-CONFIG
+        group :test do
+          set :foo, "bar"
+          set :i_am, "at the \#{foo}"
+        end
+      CONFIG
+    end
+
+    it "can retreive a key from a group" do
+      @config.get(:test).get(:foo).should == "bar"
+    end
+
+    it "can assign a key to a group" do
+      @config.test[:omg] = "wtf"
+      @config.get(:test).get(:omg).should == "wtf"
+    end
   end
 end

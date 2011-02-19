@@ -33,6 +33,11 @@ module Labor
       @config.each(&block)
     end
 
+    def group(key, &block)
+      @config[key] ||= Config.new
+      @config[key].instance_eval(&block) if block_given?
+    end
+
     private
 
     def method_missing(sym, *args)

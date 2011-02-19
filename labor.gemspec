@@ -9,14 +9,16 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Brett Buddin"]
-  s.date = %q{2011-02-17}
-  s.description = %q{      Wrapper for Gearman to make workers easier to create and manage.
+  s.date = %q{2011-02-19}
+  s.description = %q{      Wrapper for gearman-ruby that provides a different, and more portable, way of defining jobs.
 }
   s.email = %q{brett@intraspirit.net}
   s.extra_rdoc_files = [
+    "LICENSE",
     "README.md"
   ]
   s.files = [
+    "LICENSE",
     "README.md",
     "Rakefile",
     "labor.gemspec",
@@ -31,7 +33,14 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://github.com/brettbuddin/labor}
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
-  s.summary = %q{Wrapper for Gearman to make workers easier to create and manage.}
+  s.summary = %q{More portable jobs for Gearman workers.}
+  s.test_files = [
+    "spec/config_spec.rb",
+    "spec/files/sample_config.rb",
+    "spec/labor_spec.rb",
+    "spec/spec_helper.rb",
+    "spec/worker_spec.rb"
+  ]
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION

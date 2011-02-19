@@ -28,7 +28,6 @@ module Labor
         klass.instance_variable_set(:@config, Labor.config)
 
         @worker.add_ability(ability) do |data, job|
-          log "Received work."
           payload = JSON.parse data
           klass.perform(payload, job)
         end

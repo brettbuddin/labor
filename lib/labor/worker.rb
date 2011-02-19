@@ -55,8 +55,12 @@ module Labor
     # Returns nothing.
     def register_signals
       %w(INT TERM).each do |signal|
-        trap(signal) do
+        trap signal do
           @worker.worker_enabled = false
+          if @worker.status == :waiting
+            trap signal, "DEFAULT"
+            exit
+          end
         end
       end
     end

@@ -34,8 +34,8 @@ module Labor
     end
 
     def group(key, &block)
-      @config[key] ||= Config.new
-      @config[key].instance_eval(&block) if block_given?
+      @config[key.to_sym] ||= Config.new
+      @config[key.to_sym].instance_eval(&block) if block_given?
     end
 
     private

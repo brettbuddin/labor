@@ -45,6 +45,12 @@ Configs look like this:
     set :foo, "bar"
     set :i_am, "at the #{bar}"
 
+    group :credentials do
+      set :username, "murkturgler"
+      set :password, "supersecret"
+    end
+
+
 The config file would then be loaded in like this:
 
     Labor.config File.join(File.dirname(__FILE__), 'settings.rb')
@@ -54,9 +60,11 @@ When the worker is started up, Labor will load this config into the `@config` in
     class TestJob
       def self.perform
         puts "Hey! I'm #{@config[:i_am]}"
+        #=> "Hey! I'm at the bar"
+
+        puts "Here's my username: #{@config.credentials.username}"
+        #=> "Here's my username: murkturgler"
 
         true
       end
     end
-    
-    #=> "Hey! I'm at the bar"

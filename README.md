@@ -2,6 +2,10 @@
 
 A wrapper for "gearman-ruby" which provides an easy mechanism for managing your jobs. Jobs are just Ruby classes/modules which respond to the `perform` method.
 
+## Install
+
+    gem install labor
+
 ## Get Started
 
 Basic `Rakefile`:

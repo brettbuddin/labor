@@ -1,28 +1,13 @@
-begin
-  require "jeweler"
-
-  Jeweler::Tasks.new do |gem|
-    gem.name = "labor"
-    gem.version = "0.1"
-    gem.summary = "More portable jobs for Gearman workers."
-    gem.description = <<-desc
-      Wrapper for gearman-ruby that provides a different, and more portable, way of defining jobs.
-    desc
-    gem.email = "brett@intraspirit.net"
-    gem.homepage = "http://github.com/brettbuddin/labor"
-    gem.date = Time.now.strftime('%Y-%m-%d')
-    gem.authors = ["Brett Buddin"]
-    gem.files = %w( README.md Rakefile LICENSE )
-    gem.files += Dir["*", "{lib}/**/*"]
-    gem.add_dependency "gearman-ruby"
-    gem.add_dependency "json"
-
-    gem.has_rdoc = false
-  end
+desc "Stamp a new version and push it to Rubygems.org"
+task :stamp_version do
+  require 'labor/version'
   
-  Jeweler::GemcutterTasks.new
-rescue LoadError
-  puts "Jeweler (or a dependency) not available. Install it with: sudo gem install jeweler"
+  sh "gem build labor.gemspec"
+  sh "gem push labor-#{Labor::Version}.gem"
+  sh "git tag v#{Labor::Version}"
+  sh "git push origin v#{Labor::Version}"
+  sh "git push origin master"
+  sh "git clean -fd"
 end
 
 begin

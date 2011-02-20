@@ -1,3 +1,5 @@
+$LOAD_PATH.unshift 'lib'
+
 desc "Stamp a new version and push it to Rubygems.org"
 task :stamp_version do
   require 'labor/version'

@@ -3,7 +3,7 @@ module Labor
     include Helpers
 
     def initialize(*abilities)
-      @worker = Gearman::Worker.new(Labor.servers)
+      @worker = Gearman::Worker.new
       add_abilities(abilities)
     end
 
@@ -11,6 +11,7 @@ module Labor
     #
     # Returns nothing.
     def work
+      @worker.job_servers = Labor.servers
       register_signals
       loop { @worker.work or break }
     end

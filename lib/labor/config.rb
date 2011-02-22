@@ -88,7 +88,7 @@ module Labor
     #
     # Returns a Boolean of whether or not the key exists.
     def group(key, &block)
-      @config[key.to_sym] ||= Config.new
+      @config[key.to_sym] = Config.new
       @config[key.to_sym].instance_eval(&block) if block_given?
     end
 

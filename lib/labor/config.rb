@@ -19,8 +19,9 @@ module Labor
   class Config
     include Enumerable
 
-    def initialize
+    def initialize(parent = nil)
       @config = {}
+      @parent = parent unless parent.nil?
     end
 
     # Loads a config file.
@@ -88,7 +89,7 @@ module Labor
     #
     # Returns a Boolean of whether or not the key exists.
     def group(key, &block)
-      @config[key.to_sym] = Config.new
+      @config[key.to_sym] = Config.new(self)
       @config[key.to_sym].instance_eval(&block) if block_given?
     end
 
@@ -97,6 +98,8 @@ module Labor
     def method_missing(sym, *args)
       if args.length == 0 && @config.has_key?(sym)
         get(sym)
+      else
+        @parent.get(sym) unless @parent.nil?
       end
     end
   end

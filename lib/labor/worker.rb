@@ -33,7 +33,9 @@ module Labor
             payload = JSON.parse data
             klass.perform(payload, job)
           rescue Exception => e
+            backtrace = Array(e.backtrace)[0..500]
             log "Job failed: #{e.inspect}"
+            log backtrace.join("\n")
             return false
           end
         end
@@ -44,7 +46,9 @@ module Labor
             payload = JSON.parse data
             klass.after_perform(payload, result)
           rescue Exception => e
+            backtrace = Array(e.backtrace)[0..500]
             log "After job failed: #{e.inspect}"
+            log backtrace.join("\n")
           end
           end
         end

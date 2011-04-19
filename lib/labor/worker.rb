@@ -25,7 +25,7 @@ module Labor
     # Returns nothing.
     def add_abilities(abilities)
       abilities.each do |ability|
-        klass = constantize(classify(ability))
+        klass = constantize(classify(remove_meta_data(ability)))
         klass.instance_variable_set(:@config, Labor.config)
 
         @worker.add_ability(ability) do |data, job|
@@ -70,5 +70,18 @@ module Labor
       end
     end
 
+    private
+
+    # Removes the meta data from an ability name.
+    #
+    # name - The String name of the ability.
+    #
+    # Returns the String name of the ability with the
+    # meta data removed. (e.g. "ability_name[123]" => "ability_name")
+    def remove_meta_data(name)
+      matches = name.match(/(.*)\[.*\]/)
+      return matches[1] unless matches.nil?
+      name
+    end
   end
 end

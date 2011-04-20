@@ -36,7 +36,9 @@ Let's run the worker:
     $ export ABILITIES=test-job,another-test
     $ rake labor:work
 
-The `ABILITIES` environment variable can accept multiple job names; each seperated by a comma.
+The `ABILITIES` environment variable can accept multiple job names; each seperated by a comma. 
+
+Job names can also carry meta data associated with that particular worker. Meta data is any information that shouldn't affect what you name the job class in your system, but indicate to Gearman that this worker is unique. You can do this by putting your meta data inside `[` and `]` in the ability name. For example: `email[123]`. Everything within and including the `[]` symbols will be removed when referencing your worker class' `perform` method.
 
 ## Configuration
 

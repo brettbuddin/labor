@@ -5,6 +5,7 @@ require 'labor/version'
 require 'labor/core_ext'
 require 'labor/helpers'
 require 'labor/worker'
+require 'labor/ability'
 require 'labor/config'
 
 module Labor

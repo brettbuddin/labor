@@ -1,6 +1,6 @@
 # Labor
 
-A wrapper for "gearman-ruby" which provides an easy mechanism for managing your jobs. Jobs are just Ruby classes/modules which respond to the `perform` method.
+A wrapper for "gearman-ruby" which provides an easy mechanism for managing your jobs. Jobs are just Ruby classes which respond to the `perform` method.
 
 ## Install
 
@@ -14,7 +14,7 @@ Basic `Rakefile`:
     require 'labor/tasks'
 
     class TestJob
-      def self.perform
+      def perform
         puts "Hello, world!"
 
         true
@@ -22,7 +22,7 @@ Basic `Rakefile`:
     end
 
     class AnotherTest
-      def self.perform
+      def perform
         puts "Hello, world... again!"
 
         true

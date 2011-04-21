@@ -26,12 +26,14 @@ module Labor
     def add_abilities(abilities)
       abilities.each do |ability|
         klass = constantize(classify(remove_meta_data(ability)))
-        klass.instance_variable_set(:@config, Labor.config)
+        config = Labor.config
 
         @worker.add_ability(ability) do |data, job|
           begin
             payload = JSON.parse data
-            klass.perform(payload, job)
+            instance = klass.new(payload, job)
+            instance.instance_variable_set(:@config, config)
+            instance.perform
           rescue Exception => e
             backtrace = Array(e.backtrace)[0..500]
             log "Job failed: #{e.inspect}"

@@ -13,7 +13,7 @@ Basic `Rakefile`:
     require 'labor'
     require 'labor/tasks'
 
-    class TestJob
+    class TestJob < Labor::Ability
       def perform
         puts "Hello, world!"
 
@@ -21,7 +21,7 @@ Basic `Rakefile`:
       end
     end
 
-    class AnotherTest
+    class AnotherTest < Labor::Ability
       def perform
         puts "Hello, world... again!"
 
@@ -63,8 +63,8 @@ The config file would then be loaded in like this:
 
 When the worker is started up, Labor will load this config into the `@config` instance variable of your job class/module. You'll then be able to retrieve keys from the config within your job.
 
-    class TestJob
-      def self.perform
+    class TestJob < Labor::Ability
+      def perform
         puts "Hey! I'm #{@config[:i_am]}"
         #=> "Hey! I'm at the bar"
 
